@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types'
 
 const Slider = ({ min, max, label, onValueChange, value }) => {
-  // const [value, setValue] = useState(0);
 
   const handleChange = (event) => {
     onValueChange(event.target.value);
-    // console.log(event.target.value); 
   };
 
   return (
