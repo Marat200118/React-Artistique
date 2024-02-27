@@ -1,14 +1,13 @@
-// App.jsx
 import React, { useState } from 'react';
 import './App.css';
 import Slider from './components/Slider';
 import LinePatternGenerator from './components/LinePatternGenerator';
-import ColorPicker from './components/ColorPicker'; // Import the ColorPicker component
+import ColorPicker from './components/ColorPicker'; 
 
 const App = () => {
   const [strokeWidth, setStrokeWidth] = useState(0.2);
-  const [lineCount, setLineCount] = useState(10);
-  const [angle, setAngle] = useState(-45); // Default angle to match the fixedAngle in LinePatternGenerator
+  const [lineCount, setLineCount] = useState(40);
+  const [angle, setAngle] = useState(-45); 
   const [lineColor, setLineColor] = useState('#00FF00');
 
   return (
@@ -34,17 +33,17 @@ const App = () => {
           min={1}
           label="Line Count"
           value={lineCount}
-          onChange={setLineCount} // Update this to directly set the line count
+          onChange={setLineCount}
         />
         <ColorPicker
           color={lineColor}
-          onColorChange={setLineColor} // Update this to directly set the line color
+          onColorChange={setLineColor} 
         />
         <LinePatternGenerator
           lineCount={lineCount}
           strokeWidth={strokeWidth}
           lineColor={lineColor}
-          angle={angle} // Pass the angle state to the LinePatternGenerator
+          angle={angle} 
         />
       </header>
     </div>
