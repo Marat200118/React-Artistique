@@ -1,35 +1,50 @@
+// App.jsx
 import React, { useState } from 'react';
 import './App.css';
 import Slider from './components/Slider';
-import ShapeButton from './components/ShapeButton';
-import Svg from './components/Svg';
-import ColorPicker from './components/ColorPicker';
+import LinePatternGenerator from './components/LinePatternGenerator';
+import ColorPicker from './components/ColorPicker'; // Import the ColorPicker component
 
-function App() {
-  const [size, setSize] = useState(Math.floor(Math.random() * 100) + 1); 
-  const [currentShape, setCurrentShape] = useState('square');
-  const [color, setColor] = useState('yellow');
+const App = () => {
+  const [strokeWidth, setStrokeWidth] = useState(0.2);
+  const [lineCount, setLineCount] = useState(10);
+  const [angle, setAngle] = useState(-45); // Default angle to match the fixedAngle in LinePatternGenerator
+  const [lineColor, setLineColor] = useState('#00FF00');
 
   return (
     <div className="App">
       <header className="App-header">
-        <h1>React Artistique</h1>
-        <ColorPicker color={color} onColorChange={setColor} />
-        <Svg currentShape={currentShape} size={size} color={color} />
-        <div>
-          <ShapeButton shapeName="circle" setCurrentShape={setCurrentShape} />
-          <ShapeButton shapeName="square" setCurrentShape={setCurrentShape} />
-          <ShapeButton shapeName="triangle" setCurrentShape={setCurrentShape} />
-        </div>
-        <h2>Size: {size}</h2>
+        <h1>Falling Stars Pattern Generator</h1>
         <Slider
-          min={50}
-          max={180}
-          label="Shape Size"
-          value={size}
-          onValueChange={(newValue) => {
-            setSize(parseInt(newValue));
-          }}
+          max={360}
+          min={0}
+          label="Angle"
+          value={angle}
+          onChange={setAngle}
+        />
+        <Slider
+          max={2}
+          min={0.1}
+          label="Stroke Width"
+          value={strokeWidth}
+          onChange={setStrokeWidth}
+        />
+        <Slider
+          max={100}
+          min={1}
+          label="Line Count"
+          value={lineCount}
+          onChange={setLineCount} // Update this to directly set the line count
+        />
+        <ColorPicker
+          color={lineColor}
+          onColorChange={setLineColor} // Update this to directly set the line color
+        />
+        <LinePatternGenerator
+          lineCount={lineCount}
+          strokeWidth={strokeWidth}
+          lineColor={lineColor}
+          angle={angle} // Pass the angle state to the LinePatternGenerator
         />
       </header>
     </div>
