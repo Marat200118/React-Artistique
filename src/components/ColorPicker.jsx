@@ -7,7 +7,9 @@ const ColorPicker = ({ color, onColorChange }) => {
       type="color"
       value={color}
       onChange={e => onColorChange(e.target.value)}
-      style={{ margin: '10px' }}
+      style={{ 
+        margin: '10px',
+      }}
     />
   );
 };

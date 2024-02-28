@@ -5,8 +5,8 @@ import LinePatternGenerator from './components/LinePatternGenerator';
 import ColorPicker from './components/ColorPicker'; 
 
 const App = () => {
-  const [strokeWidth, setStrokeWidth] = useState(0.2);
-  const [lineCount, setLineCount] = useState(40);
+  const [strokeWidth, setStrokeWidth] = useState(0.05);
+  const [lineCount, setLineCount] = useState(Math.random() * 100); 
   const [angle, setAngle] = useState(-45); 
   const [lineColor, setLineColor] = useState('#00FF00');
 
@@ -17,13 +17,15 @@ const App = () => {
         <Slider
           max={360}
           min={0}
+          step={1}
           label="Angle"
           value={angle}
           onChange={setAngle}
         />
         <Slider
-          max={2}
-          min={0.1}
+          max={1}
+          min={0.05}
+          step={0.01}
           label="Stroke Width"
           value={strokeWidth}
           onChange={setStrokeWidth}
@@ -31,6 +33,7 @@ const App = () => {
         <Slider
           max={100}
           min={1}
+          step={1}
           label="Line Count"
           value={lineCount}
           onChange={setLineCount}
