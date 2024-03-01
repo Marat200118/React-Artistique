@@ -8,11 +8,15 @@ const LinePatternGenerator = ({ lineCount, strokeWidth, lineColor, angle }) => {
 
   const lines = Array.from({ length: lineCount }, (_, i) => {
    
-    const x1 = randomInRange(0, 100);
-    const y1 = randomInRange(0, 100);
+    // const x1 = randomInRange(0, 100);
+    const x1 = Math.random() * 100;
+    // const y1 = randomInRange(0, 100);
+    const y1 = Math.random() * 100;
+
     const lineLength = randomInRange(30, 100);
 
     const x2 = x1 + lineLength * Math.cos((angle * Math.PI) / 180);
+    // const x2 = x1 + lineLength * Math.cos(angle);
     const y2 = y1 + lineLength * Math.sin((angle * Math.PI) / 180);
 
     return (
@@ -24,6 +28,7 @@ const LinePatternGenerator = ({ lineCount, strokeWidth, lineColor, angle }) => {
         y2={y2}
         stroke={`url(#gradient${i})`}
         strokeWidth={strokeWidth}
+        strokeLinecap="round"
       />
     );
   });
