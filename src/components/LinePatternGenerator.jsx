@@ -13,11 +13,23 @@ const LinePatternGenerator = ({ lineCount, strokeWidth, lineColor, angle }) => {
     // const y1 = randomInRange(0, 100);
     const y1 = Math.random() * 100;
 
+    // const x1 = `${Math.random() * 100}%`;
+    // const y1 = `${Math.random() * 100}%`;
+
+
     const lineLength = randomInRange(30, 100);
 
     const x2 = x1 + lineLength * Math.cos((angle * Math.PI) / 180);
-    // const x2 = x1 + lineLength * Math.cos(angle);
     const y2 = y1 + lineLength * Math.sin((angle * Math.PI) / 180);
+
+
+    // const x1=10;
+    // const y1=10;
+    // const x2=90;
+    // const y2=90;
+
+    // const x2 = x1 + lineLength * Math.cos(angle);
+
 
     return (
       <line
@@ -36,13 +48,14 @@ const LinePatternGenerator = ({ lineCount, strokeWidth, lineColor, angle }) => {
   return (
     <svg
       viewBox="0 0 100 100"
+      preserveAspectRatio="xMidYMid meet"
       width="100%"
       height="100%"
       style={{ backgroundColor: 'black' }}
     >
       <defs>
         {lines.map((_, i) => (
-          <linearGradient id={`gradient${i}`} gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="100" y2="0">
+          <linearGradient id={`gradient${i}`} gradientUnits="userSpaceOnUse" x1="100" y1="100" x2="100" y2="0">
             <stop offset="0%" style={{stopColor: lineColor, stopOpacity: 1}} />
             <stop offset="100%" style={{stopColor: lineColor, stopOpacity: 0}} />
           </linearGradient>
