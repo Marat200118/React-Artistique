@@ -5,7 +5,7 @@ import LinePatternGenerator from './components/LinePatternGenerator';
 import ColorPicker from './components/ColorPicker'; 
 
 const App = () => {
-  const [strokeWidth, setStrokeWidth] = useState(0.05);
+  const [strokeWidth, setStrokeWidth] = useState(0.1);
   const [lineCount, setLineCount] = useState(50); 
   const [angle, setAngle] = useState(-45); 
   const [lineColor, setLineColor] = useState('#00FF00');
