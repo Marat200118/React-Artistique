@@ -2,56 +2,57 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const LinePatternGenerator = ({ lineCount, strokeWidth, lineColor, angle }) => {
+const LinePatternGenerator = ({ lineCount, strokeWidth, startColor, endColor, angle }) => {
 
   const randomInRange = (min, max) => Math.random() * (max - min) + min;
 
-  const lines = Array.from({ length: lineCount }, (_, i) => {
-   
-    // const x1 = randomInRange(0, 100);
-    // const x1 = Math.random() * 100;
-    // const y1 = randomInRange(0, 100);
-    // const y1 = Math.random() * 100;
-
+  const lineElements = Array.from({ length: lineCount }, (_, i) => {
     const x1 = Math.random() * 120 - 10; // Starting from -10% to 110% of the viewBox width
-    const y1 = Math.random() * 120 - 10; // Starting from -10% to 110% of the viewBox height
-
+    const y1 = Math.random() * 100; // Starting from -10% to 110% of the viewBox height
     const lineLength = randomInRange(30, 100);
-
     const x2 = x1 + lineLength * Math.cos((angle * Math.PI) / 180);
     const y2 = y1 + lineLength * Math.sin((angle * Math.PI) / 180);
+    const fadedEndColor = endColor + '1A';
 
-    return (
+
+    const gradientId = `gradient${i}`;
+    const gradient = (
+      <linearGradient key={gradientId} id={gradientId} gradientUnits="userSpaceOnUse" x1={x1} y1={y1} x2={x2} y2={y2}>
+        <stop offset="0%" stopColor={startColor} stopOpacity="1" />
+        <stop offset="50%" stopColor={endColor} stopOpacity="1" />
+        <stop offset="100%" stopColor={fadedEndColor} stopOpacity="0" />
+      </linearGradient>
+    );
+
+    // Line element referencing the above gradient definition
+    const line = (
       <line
         key={i}
         x1={x1}
         y1={y1}
         x2={x2}
         y2={y2}
-        stroke={`url(#gradient${i})`}
+        stroke={`url(#${gradientId})`}
         strokeWidth={strokeWidth}
         strokeLinecap="round"
       />
     );
+
+    return { line, gradient };
   });
 
   return (
     <svg
-      viewBox="50 0 50 110"
+       viewBox="70 0 1 100" // Updated viewBox to encompass the random line starts and ends
       preserveAspectRatio="xMidYMid meet"
       width="100%"
       height="100%"
       style={{ backgroundColor: 'black' }}
     >
       <defs>
-        {lines.map((_, i) => (
-          <linearGradient id={`gradient${i}`} gradientUnits="userSpaceOnUse" x1="100" y1="100" x2="100" y2="0">
-            <stop offset="0%" style={{stopColor: lineColor, stopOpacity: 1}} />
-            <stop offset="100%" style={{stopColor: lineColor, stopOpacity: 0}} />
-          </linearGradient>
-        ))} //improve the syntax
+        {lineElements.map(({ gradient }) => gradient)}
       </defs>
-      {lines}
+      {lineElements.map(({ line }) => line)}
     </svg>
   );
 };
@@ -59,7 +60,8 @@ const LinePatternGenerator = ({ lineCount, strokeWidth, lineColor, angle }) => {
 LinePatternGenerator.propTypes = {
   lineCount: PropTypes.number.isRequired,
   strokeWidth: PropTypes.number.isRequired,
-  lineColor: PropTypes.string.isRequired,
+  startColor: PropTypes.string.isRequired,
+  endColor: PropTypes.string.isRequired,
   angle: PropTypes.number.isRequired,
 };
 

@@ -5,10 +5,11 @@ import LinePatternGenerator from './components/LinePatternGenerator';
 import ColorPicker from './components/ColorPicker'; 
 
 const App = () => {
-  const [strokeWidth, setStrokeWidth] = useState(0.1);
+  const [strokeWidth, setStrokeWidth] = useState(0.25);
   const [lineCount, setLineCount] = useState(50); 
   const [angle, setAngle] = useState(-45); 
-  const [lineColor, setLineColor] = useState('#00FF00');
+  const [startColor, setStartColor] = useState('#00FF00');
+  const [endColor, setEndColor] = useState('#FF0000');
 
   return (
     <div className="App">
@@ -39,18 +40,27 @@ const App = () => {
           onChange={setLineCount}
         />
         <ColorPicker
-          color={lineColor}
-          onColorChange={setLineColor} 
+          label="Start Color"
+          color={startColor}
+          onColorChange={setStartColor}
+        />
+        <ColorPicker
+          label="End Color"
+          color={endColor}
+          onColorChange={setEndColor}
         />
       </header>
       <LinePatternGenerator
           lineCount={lineCount}
           strokeWidth={strokeWidth}
-          lineColor={lineColor}
-          angle={angle} 
+          startColor={startColor}
+          endColor={endColor}
+          angle={angle}
         />
     </div>
   );
 }
 
 export default App;
+
+
