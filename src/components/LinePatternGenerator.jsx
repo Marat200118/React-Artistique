@@ -24,7 +24,6 @@ const LinePatternGenerator = ({ lineCount, strokeWidth, startColor, endColor, an
       </linearGradient>
     );
 
-    // Line element referencing the above gradient definition
     const line = (
       <line
         key={i}

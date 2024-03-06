@@ -5,11 +5,21 @@ import LinePatternGenerator from './components/LinePatternGenerator';
 import ColorPicker from './components/ColorPicker'; 
 
 const App = () => {
+
+  const getRandomColor = () => {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];   //* taken from https://stackoverflow.com/questions/1484506/random-color-generator
+    }
+    return color;
+  };
+  
   const [strokeWidth, setStrokeWidth] = useState(0.25);
-  const [lineCount, setLineCount] = useState(50); 
-  const [angle, setAngle] = useState(-45); 
-  const [startColor, setStartColor] = useState('#00FF00');
-  const [endColor, setEndColor] = useState('#FF0000');
+  const [lineCount, setLineCount] = useState(Math.random() * 100); 
+  const [angle, setAngle] = useState(Math.random() * 360); 
+  const [startColor, setStartColor] = useState(getRandomColor());
+  const [endColor, setEndColor] = useState(getRandomColor());
 
   return (
     <div className="App">
@@ -21,7 +31,7 @@ const App = () => {
           step={1}
           label="Angle"
           value={angle}
-          onChange={setAngle}
+          onChange={(newValue) => setAngle(Number(newValue))}
         />
         <Slider
           max={1}
@@ -29,7 +39,7 @@ const App = () => {
           step={0.01}
           label="Stroke Width"
           value={strokeWidth}
-          onChange={setStrokeWidth}
+          onChange={(newValue) => setStrokeWidth(Number(newValue))}
         />
         <Slider
           max={100}
@@ -37,7 +47,7 @@ const App = () => {
           step={1}
           label="Line Count"
           value={lineCount}
-          onChange={setLineCount}
+          onChange={(newValue) => setLineCount(Number(newValue))}
         />
         <ColorPicker
           label="Start Color"
