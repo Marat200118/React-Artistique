@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const LinePatternGenerator = ({ lineCount, strokeWidth, startColor, endColor, angle }) => {
+const LinePatternGenerator = ({ lineCount, strokeWidth, startColor, endColor, angle, svgBackgroundColor }) => {
 
   const randomInRange = (min, max) => Math.random() * (max - min) + min;
 
@@ -46,7 +46,7 @@ const LinePatternGenerator = ({ lineCount, strokeWidth, startColor, endColor, an
       preserveAspectRatio="xMidYMid meet"
       width="100%"
       height="100%"
-      style={{ backgroundColor: 'black' }}
+      style={{ backgroundColor: svgBackgroundColor }}
     >
       <defs>
         {lineElements.map(({ gradient }) => gradient)}
@@ -62,6 +62,7 @@ LinePatternGenerator.propTypes = {
   startColor: PropTypes.string.isRequired,
   endColor: PropTypes.string.isRequired,
   angle: PropTypes.number.isRequired,
+  svgBackgroundColor: PropTypes.string.isRequired,
 };
 
 export default LinePatternGenerator;

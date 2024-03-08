@@ -20,9 +20,18 @@ const App = () => {
   const [angle, setAngle] = useState(Math.random() * 360); 
   const [startColor, setStartColor] = useState(getRandomColor());
   const [endColor, setEndColor] = useState(getRandomColor());
+  const [theme, setTheme] = useState('dark');
+
+  const switchTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+  };
+  
+  const svgBackgroundColor = theme === 'dark' ? '#1C1D1E' : '#F7F7F7';
+  const textColor = theme === 'dark' ? '#F7F7F7' : '#1C1D1E';
+  const buttonTextColor = theme === 'dark' ? '#1C1D1E' : '#F7F7F7';
 
   return (
-    <div className="App">
+     <div className="App" style={{ color: textColor }}>
       <header className="App-header">
         <h1>Falling Stars Pattern Generator</h1>
         <Slider
@@ -66,7 +75,9 @@ const App = () => {
           startColor={startColor}
           endColor={endColor}
           angle={angle}
+          svgBackgroundColor={svgBackgroundColor}
         />
+         <button onClick={switchTheme} className='switchThemeButton' style={{color: buttonTextColor, backgroundColor: textColor}}>Switch Theme</button>
     </div>
   );
 }
