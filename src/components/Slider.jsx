@@ -19,7 +19,7 @@ const Slider = ({ min, max, value, step, onChange, label }) => {
           onChange={handleSliderChange}
         />
       </label>
-      <div>Value: {value}</div>
+      {/* <div>Value: {value}</div> */}
     </div>
   );
 };

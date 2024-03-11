@@ -1,66 +1,63 @@
-// LinePatternGenerator.jsx
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const LinePatternGenerator = ({ lineCount, strokeWidth, lineColor, angle }) => {
+const LinePatternGenerator = ({ strokeWidth, startColor, endColor, svgBackgroundColor, starsAttributes }) => {
+  const lineElements = starsAttributes.map((attr, i) => {
+    const { x1, y1, x2, y2 } = attr;
+    const fadedEndColor = endColor + '1A';
+    const gradientId = `gradient${i}`;
 
-  const randomInRange = (min, max) => Math.random() * (max - min) + min;
+    const gradient = (
+      <linearGradient key={gradientId} id={gradientId} gradientUnits="userSpaceOnUse" x1={x1} y1={y1} x2={x2} y2={y2}>
+        <stop offset="0%" stopColor={startColor} stopOpacity="1" />
+        <stop offset="50%" stopColor={endColor} stopOpacity="1" />
+        <stop offset="100%" stopColor={fadedEndColor} stopOpacity="0" />
+      </linearGradient>
+    );
 
-  const lines = Array.from({ length: lineCount }, (_, i) => {
-   
-    // const x1 = randomInRange(0, 100);
-    // const x1 = Math.random() * 100;
-    // const y1 = randomInRange(0, 100);
-    // const y1 = Math.random() * 100;
-
-    const x1 = Math.random() * 120 - 10; // Starting from -10% to 110% of the viewBox width
-    const y1 = Math.random() * 120 - 10; // Starting from -10% to 110% of the viewBox height
-
-    const lineLength = randomInRange(30, 100);
-
-    const x2 = x1 + lineLength * Math.cos((angle * Math.PI) / 180);
-    const y2 = y1 + lineLength * Math.sin((angle * Math.PI) / 180);
-
-    return (
+    const line = (
       <line
         key={i}
-        x1={x1}
-        y1={y1}
-        x2={x2}
-        y2={y2}
-        stroke={`url(#gradient${i})`}
+        x1={`${x1}%`}
+        y1={`${y1}%`}
+        x2={`${x2}%`}
+        y2={`${y2}%`}
+        stroke={`url(#${gradientId})`}
         strokeWidth={strokeWidth}
         strokeLinecap="round"
       />
     );
+
+    return { line, gradient };
   });
 
   return (
     <svg
-      viewBox="50 0 50 110"
+      viewBox="0 0 120 100" 
       preserveAspectRatio="xMidYMid meet"
       width="100%"
       height="100%"
-      style={{ backgroundColor: 'black' }}
+      style={{ backgroundColor: svgBackgroundColor }}
     >
       <defs>
-        {lines.map((_, i) => (
-          <linearGradient id={`gradient${i}`} gradientUnits="userSpaceOnUse" x1="100" y1="100" x2="100" y2="0">
-            <stop offset="0%" style={{stopColor: lineColor, stopOpacity: 1}} />
-            <stop offset="100%" style={{stopColor: lineColor, stopOpacity: 0}} />
-          </linearGradient>
-        ))} //improve the syntax
+        {lineElements.map(({ gradient }) => gradient)}
       </defs>
-      {lines}
+      {lineElements.map(({ line }) => line)}
     </svg>
   );
 };
 
 LinePatternGenerator.propTypes = {
-  lineCount: PropTypes.number.isRequired,
   strokeWidth: PropTypes.number.isRequired,
-  lineColor: PropTypes.string.isRequired,
-  angle: PropTypes.number.isRequired,
+  startColor: PropTypes.string.isRequired,
+  endColor: PropTypes.string.isRequired,
+  svgBackgroundColor: PropTypes.string.isRequired,
+  starsAttributes: PropTypes.arrayOf(PropTypes.shape({
+    x1: PropTypes.number.isRequired,
+    y1: PropTypes.number.isRequired,
+    x2: PropTypes.number.isRequired,
+    y2: PropTypes.number.isRequired,
+  })).isRequired,
 };
 
 export default LinePatternGenerator;
