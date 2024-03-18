@@ -1,16 +1,24 @@
-# React + Vite
+# Falling Stars Pattern Generator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The Falling Stars Pattern Generator is a React application that dynamically creates beautiful SVG patterns resembling stars falling from the sky. Users can adjust various parameters such as the angle, color, stroke width, and line count of the stars through a user-friendly interface.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Dynamic SVG Pattern Generation**: Generates customizable patterns that simulate stars falling.
+- **Customizable Parameters**: Users can adjust the angle, stroke width, line count, start color, and end color of the falling stars.
+- **Theme Switching**: Supports light and dark themes for a comfortable viewing experience.
 
-## Usage
+## Getting Started
 
-To use this template, you can use [degit]
-  
-  ```bash
-  degit "vitejs/vite#template-react" my-react-app
-  ```
+### Prerequisites
+
+Before you begin, ensure you have installed:
+- [Node.js](https://nodejs.org/) (version 12.x or later)
+- [npm](https://npmjs.com/) (version 6.x or later)
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/your-username/falling-stars-pattern-generator.git
+```
